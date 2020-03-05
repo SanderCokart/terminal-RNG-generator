@@ -1,6 +1,7 @@
 public class Main {
     static int rows = 5;
     static int columns = 5;
+    static int[][] data = new int[rows][columns];
 
 
     public static void main(String[] args) {
@@ -28,10 +29,21 @@ public class Main {
         }
     }
 
+    /**
+     * generates the minimum numbers in a column range
+     * uses the global data variable to find it
+     * min is initialized with the first row entry of the column
+     * if the rng data that occurs in the column range is smaller than current min
+     * then the data becomes the new min
+     */
     private static void generateMin() {
         System.out.print("Min:\t");
         for (int c = 0; c < columns; c++) {
-            System.out.print("[min]\t");
+            int min = data[0][c];
+            for (int r = 0; r < rows; r++) {
+                if (data[r][c] < min) min = data[r][c];
+            }
+            System.out.print(min + "\t\t");
         }
     }
 
@@ -50,10 +62,15 @@ public class Main {
 
                 //add random number to sum
                 sumOfRow += rng;
+
+                //add random number to global data array
+                data[r][c] = rng;
             }
 
+            //shows average of data per row
             System.out.print(getAverage(sumOfRow, columns));
 
+            //end of data row
             System.out.print("\n");
         }
     }

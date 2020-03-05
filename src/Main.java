@@ -1,8 +1,8 @@
 public class Main {
-    static int rows = 5;
-    static int columns = 5;
-    static int[][] data = new int[rows][columns];
-    static double[] multipleRowAverages = new double[rows];
+    private static int rows = 5;
+    private static int columns = 5;
+    private static int[][] data = new int[rows][columns];
+    private static int[] multipleRowAverages = new int[rows];
 
 
     public static void main(String[] args) {
@@ -20,11 +20,10 @@ public class Main {
     }
 
     private static void generateMultipleRowAverage() {
-        double sum = 0;
+        int sum = 0;
         for (int i = 0; i < rows; i++) {
             sum += multipleRowAverages[i];
         }
-
 
         System.out.print(getAverage(sum, rows) + "\n");
     }
@@ -86,7 +85,7 @@ public class Main {
             }
 
             //shows average of data per row and stores average in an array
-            double average = getAverage(sumOfRow, columns);
+            int average = getAverage(sumOfRow, columns);
             multipleRowAverages[r] = average;
             System.out.print(average);
 
@@ -100,8 +99,8 @@ public class Main {
      * @param devidedBy
      * @return average
      */
-    private static double getAverage(double sum, int devidedBy) {
-        return (double) sum / devidedBy;
+    private static int getAverage(int sum, int devidedBy) {
+        return Math.round((float) sum / devidedBy);
     }
 
     /**

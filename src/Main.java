@@ -37,16 +37,29 @@ public class Main {
 
     private static void generateData() {
         for (int r = 0; r < rows; r++) {
+            //sum of row init
+            int sumOfRow = 0;
+
             //row index
             System.out.print(r + "\t\t");
 
             for (int c = 0; c < columns; c++) {
+                //generate random number and show on screen
                 int rng = RNG();
                 System.out.print(rng + "\t\t");
+
+                //add random number to sum
+                sumOfRow += rng;
             }
 
-            System.out.print("[Avg]\n");
+            System.out.print(getAverage(sumOfRow, columns));
+
+            System.out.print("\n");
         }
+    }
+
+    private static double getAverage(int sum, int devidedBy) {
+        return (double) sum / devidedBy;
     }
 
     /**

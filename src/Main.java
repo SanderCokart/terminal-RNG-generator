@@ -22,9 +22,21 @@ public class Main {
         System.out.print("[avgOfRow]\n");
     }
 
+    /**
+     * generates the maximum numbers in a column range
+     * uses the global data variable to find it
+     * max is initialized with 0 and if a data entry is higher
+     * then it becomes the new max
+     */
     private static void generateMax() {
+        int max = 0;
+
         System.out.print("Max:\t");
         for (int c = 0; c < columns; c++) {
+            for (int r = 0; r < rows; r++) {
+                if (data[r][c] > max) max = data[r][c];
+            }
+            System.out.print(max + "\t\t");
             System.out.print("[max]\t");
         }
     }

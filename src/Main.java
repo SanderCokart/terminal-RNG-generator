@@ -2,13 +2,14 @@ public class Main {
     static int rows = 5;
     static int columns = 5;
     static int[][] data = new int[rows][columns];
+    static double[] multipleRowAverages = new double[rows];
 
 
     public static void main(String[] args) {
         generateHeader();
         generateData();
         generateMin();
-        generateAvarageOfRowAverages();
+        generateMultipleRowAverage();
         generateMax();
         generateStandardDeviation();
     }
@@ -18,8 +19,14 @@ public class Main {
 
     }
 
-    private static void generateAvarageOfRowAverages() {
-        System.out.print("[avgOfRow]\n");
+    private static void generateMultipleRowAverage() {
+        double sum = 0;
+        for (int i = 0; i < rows; i++) {
+            sum += multipleRowAverages[i];
+        }
+
+
+        System.out.print(getAverage(sum, rows) + "\n");
     }
 
     /**
@@ -37,7 +44,6 @@ public class Main {
                 if (data[r][c] > max) max = data[r][c];
             }
             System.out.print(max + "\t\t");
-            System.out.print("[max]\t");
         }
     }
 
@@ -79,15 +85,22 @@ public class Main {
                 data[r][c] = rng;
             }
 
-            //shows average of data per row
-            System.out.print(getAverage(sumOfRow, columns));
+            //shows average of data per row and stores average in an array
+            double average = getAverage(sumOfRow, columns);
+            multipleRowAverages[r] = average;
+            System.out.print(average);
 
             //end of data row
             System.out.print("\n");
         }
     }
 
-    private static double getAverage(int sum, int devidedBy) {
+    /**
+     * @param sum
+     * @param devidedBy
+     * @return average
+     */
+    private static double getAverage(double sum, int devidedBy) {
         return (double) sum / devidedBy;
     }
 

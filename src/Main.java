@@ -2,7 +2,7 @@ public class Main {
     private static int rows = 5;
     private static int columns = 5;
     private static int[][] data = new int[rows][columns];
-    private static int[] multipleRowAverages = new int[rows];
+    private static double[] multipleRowAverages = new double[rows];
 
 
     public static void main(String[] args) {
@@ -14,18 +14,24 @@ public class Main {
         generateStandardDeviation();
     }
 
-    private static void generateStandardDeviation() {
-        System.out.print("[SD]");
-
+    private static double square(double number) {
+        return number * number;
     }
 
-    private static void generateMultipleRowAverage() {
-        int sum = 0;
+    private static double getAverageOfRows() {
+        double sum = 0;
         for (int i = 0; i < rows; i++) {
             sum += multipleRowAverages[i];
         }
+        return getAverage(sum, rows);
+    }
 
-        System.out.print(getAverage(sum, rows) + "\n");
+    private static void generateMultipleRowAverage() {
+        double average = getAverageOfRows();
+
+        System.out.printf("%.3f", average);
+
+        System.out.print("\n");
     }
 
     /**
@@ -67,7 +73,7 @@ public class Main {
     private static void generateData() {
         for (int r = 0; r < rows; r++) {
             //sum of row init
-            int sumOfRow = 0;
+            double sumOfRow = 0;
 
             //row index
             System.out.print(r + "\t\t");
@@ -85,7 +91,7 @@ public class Main {
             }
 
             //shows average of data per row and stores average in an array
-            int average = getAverage(sumOfRow, columns);
+            double average = getAverage(sumOfRow, columns);
             multipleRowAverages[r] = average;
             System.out.print(average);
 
@@ -99,8 +105,8 @@ public class Main {
      * @param devidedBy
      * @return average
      */
-    private static int getAverage(int sum, int devidedBy) {
-        return Math.round((float) sum / devidedBy);
+    private static double getAverage(double sum, double devidedBy) {
+        return (float) sum / devidedBy;
     }
 
     /**
@@ -119,6 +125,19 @@ public class Main {
             System.out.print("\t\t" + c);
         }
         System.out.print("\t\tAverage: \n");
+    }
+
+    private static void generateStandardDeviation() {
+        double average = getAverageOfRows();
+        double sampleVariation = 0;
+
+        for (int i = 0; i < rows; i++) {
+            sampleVariation += square(multipleRowAverages[i] - average) / rows;
+        }
+
+        double standardDeviation = Math.sqrt(sampleVariation);
+
+        System.out.printf("%.3f", standardDeviation);
     }
 
 
